@@ -20,16 +20,9 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: Veracode@2
+- task: CopyFiles@2
   inputs:
-    ConnectionDetailsSelection: 'Credentials'
-    username: 'vnagaraj@securecodewarrior.com'
-    password: 'dev540dev522GWEB#'
-    veracodeAppProfile: 'Sample App'
-    version: '$(build.buildNumber)'
-    filepath: '$(build.artifactstagingdirectory)'
-    createSandBox: false
-    createProfile: false
-    scanStatusCheckInterval: '60'
-    importResults: true
-    failBuildOnPolicyFail: false
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+    CleanTargetFolder: true
+    OverWrite: true
