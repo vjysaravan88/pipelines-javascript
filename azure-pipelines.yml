@@ -16,7 +16,10 @@ steps:
   displayName: 'Install Node.js'
 - task: CopyFiles@2
   inputs:
-    Contents: '**'
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: |
+     **/*
+     !.git/**/*
     TargetFolder: '$(build.artifactstagingdirectory)'
     CleanTargetFolder: true
     OverWrite: true
