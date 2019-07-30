@@ -14,12 +14,6 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
-
 - task: CopyFiles@2
   inputs:
     Contents: '**'
@@ -39,3 +33,8 @@ steps:
     scanStatusCheckInterval: '60'
     importResults: true
     failBuildOnPolicyFail: false
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
