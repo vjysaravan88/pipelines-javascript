@@ -20,7 +20,6 @@ steps:
     command: 'login'
 
 - script: |
+    docker pull tenableio-docker-consec-local.jfrog.io/cs-scanner:latest
     npm install
-    docker pull opensecurity/nodejsscan
-    npm run build
   displayName: 'npm install and build'
