@@ -14,30 +14,9 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: |
-     **/*
-     !.git/**/*
-    TargetFolder: '$(build.artifactstagingdirectory)'
-    CleanTargetFolder: true
-    OverWrite: true
-- task: Veracode@2
-  inputs:
-    ConnectionDetailsSelection: 'Credentials'
-    username: 'vnagaraj@securecodewarrior.com'
-    password: 'dev540dev522GWEB#'
-    veracodeAppProfile: 'Sample App'
-    version: '$(build.buildNumber)'
-    filepath: '$(build.artifactstagingdirectory)'
-    createSandBox: false
-    createProfile: false
-    scanStatusCheckInterval: '60'
-    importResults: true
-    failBuildOnPolicyFail: false
 
 - script: |
     npm install
+    docker pull opensecurity/nodejsscan
     npm run build
   displayName: 'npm install and build'
