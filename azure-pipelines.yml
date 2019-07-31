@@ -27,10 +27,10 @@ steps:
     docker pull tenableio-docker-consec-local.jfrog.io/cs-scanner:latest
     docker pull opensecurity/nodejsscan
     docker save opensecurity/nodejsscan:latest | docker run \
-    -e TENABLE_ACCESS_KEY=$(TENABLE_ACCESS_KEY) \
-    -e TENABLE_SECRET_KEY=$(TENABLE_SECRET_KEY) \
-    -e IMPORT_REPO_NAME=$(IMPORT_REPO_NAME) \
-    -i tenableio-docker-consec-local.jfrog.io/cs-scanner:latest inspect-image SCW_Test_Image	
+      -e TENABLE_ACCESS_KEY=$(TENABLE_ACCESS_KEY) \
+      -e TENABLE_SECRET_KEY=$(TENABLE_SECRET_KEY) \
+      -e IMPORT_REPO_NAME=$(IMPORT_REPO_NAME) \
+      -i tenableio-docker-consec-local.jfrog.io/cs-scanner:latest inspect-image SCW_Test_Image	
   env:
     TENABLE_ACCESS_KEY: $(TENABLE_ACCESS_KEY)
     TENABLE_SECRET_KEY: $(TENABLE_SECRET_KEY)
