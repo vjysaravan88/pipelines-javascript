@@ -29,3 +29,8 @@ steps:
     regionName: 'ap-southeast-1'
     scriptType: 'inline'
     inlineScript: 'export ECR_LOGIN=$(/home/vsts/.local/bin/aws ecr get-login --no-include-email)'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo $ECR_LOGIN
