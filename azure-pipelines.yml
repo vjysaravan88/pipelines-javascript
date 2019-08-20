@@ -35,3 +35,4 @@ steps:
       ECR_LOGIN=$(/home/vsts/.local/bin/aws ecr get-login --no-include-email)
       PASSWORD=`echo $ECR_LOGIN | cut -d' ' -f6`
       DOCKER_USER=AWS DOCKER_PASSWORD=${PASSWORD} CLAIR_ADDR=$CLAIR_URL JSON_OUTPUT=true ./klar $ECR_REPOSITORY_URI:$IMAGE_TAG > output.json
+      cat output.json
