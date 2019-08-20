@@ -34,4 +34,4 @@ steps:
       mv ./klar-2.4.0-linux-amd64 ./klar
       chmod +x ./klar
       PASSWORD=`echo $ECR_LOGIN | cut -d' ' -f6`
-      DOCKER_USER=AWS DOCKER_PASSWORD=${PASSWORD} CLAIR_ADDR=$CLAIR_URL JSON_OUTPUT=true ./klar $ECR_REPOSITORY_URI:$IMAGE_TAG
+      DOCKER_USER=AWS DOCKER_PASSWORD=${PASSWORD} CLAIR_ADDR=$CLAIR_URL JSON_OUTPUT=true ./klar $ECR_REPOSITORY_URI:$IMAGE_TAG > output.json
