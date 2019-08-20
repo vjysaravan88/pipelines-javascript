@@ -14,21 +14,12 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
-- task: Docker@2
-  inputs:
-    containerRegistry: 'Tenable Container Scanner'
-    command: 'login'
-  displayName: 'Login to Tenable Container Registry'
 - script: |
-    docker pull tenableio-docker-consec-local.jfrog.io/cs-scanner:latest
-    docker pull opensecurity/nodejsscan
-    docker save opensecurity/nodejsscan:latest | docker run \
-      -e TENABLE_ACCESS_KEY=$(TENABLE_ACCESS_KEY) \
-      -e TENABLE_SECRET_KEY=$(TENABLE_SECRET_KEY) \
-      -e IMPORT_REPO_NAME=$(IMPORT_REPO_NAME) \
-      -i tenableio-docker-consec-local.jfrog.io/cs-scanner:latest inspect-image SCW_Test_Image	
-  env:
-    TENABLE_ACCESS_KEY: $(TENABLE_ACCESS_KEY)
-    TENABLE_SECRET_KEY: $(TENABLE_SECRET_KEY)
-    IMPORT_REPO_NAME: $(IMPORT_REPO_NAME)
-  displayName: 'Run the Tenable.io CS Scanner locally'
+    pip3 install awscli --upgrade --user
+  displayName: 'Install Tools'
+- task: AWSShellScript@1
+  inputs:
+    awsCredentials: 'AWS'
+    regionName: 'ap-southeast-1'
+    scriptType: 'inline'
+    inlineScript: 'eval $(/home/vsts/.local/bin/aws ecr get-login --no-include-email)'
