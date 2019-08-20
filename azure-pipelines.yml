@@ -22,6 +22,9 @@ steps:
 - script: |
     python -m pip install --upgrade pip==9.0.3 python3-setuptools wheel
     pip3 install awscli --upgrade --user
+    wget https://github.com/optiopay/klar/releases/download/v2.4.0/klar-2.4.0-linux-amd64
+    mv ./klar-2.4.0-linux-amd64 ./klar
+    chmod +x ./klar
   displayName: 'Install Tools'
 - task: AWSShellScript@1
   inputs:
@@ -30,8 +33,5 @@ steps:
     scriptType: 'inline'
     inlineScript: |
       ECR_LOGIN=$(/home/vsts/.local/bin/aws ecr get-login --no-include-email)
-      wget https://github.com/optiopay/klar/releases/download/v2.4.0/klar-2.4.0-linux-amd64
-      mv ./klar-2.4.0-linux-amd64 ./klar
-      chmod +x ./klar
       PASSWORD=`echo $ECR_LOGIN | cut -d' ' -f6`
       DOCKER_USER=AWS DOCKER_PASSWORD=${PASSWORD} CLAIR_ADDR=$CLAIR_URL JSON_OUTPUT=true ./klar $ECR_REPOSITORY_URI:$IMAGE_TAG > output.json
