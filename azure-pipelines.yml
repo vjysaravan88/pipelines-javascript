@@ -15,6 +15,7 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 - script: |
+    python -m pip install --upgrade pip==9.0.3 setuptools wheel
     pip3 install awscli --upgrade --user
   displayName: 'Install Tools'
 - task: AWSShellScript@1
